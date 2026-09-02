@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Tricoteuse Masquée — Tricots faits main</title>
+<meta name="description" content="La Tricoteuse Masquée — chandails, châles, bas, tuques et accessoires tricotés à la main avec soin et passion.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2323201b' d='M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f8f3e8;
+    --cream-2:#f0e8d8;
+    --paper:#fffdf8;
+    --ink:#26221c;
+    --ink-soft:#5c564a;
+    --green:#42503c;
+    --green-dark:#2c3527;
+    --rust:#af6636;
+    --mustard:#c99a3f;
+    --line:rgba(38,34,28,0.14);
+    --shadow:0 18px 40px -20px rgba(38,34,28,0.35);
+    --radius:6px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:500;
+    line-height:1.12;
+    margin:0 0 .5em;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--rust);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    margin-bottom:1.1em;
+  }
+  .eyebrow .star{width:.7em;height:.7em;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);}
+  section{position:relative;}
+
+  /* ---------- star icon ---------- */
+  .star{display:inline-block;fill:currentColor;}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky;top:0;z-index:100;
+    background:rgba(248,243,232,.86);
+    backdrop-filter:blur(10px) saturate(1.1);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem clamp(1.25rem,4vw,3rem);
+    max-width:1120px;margin:0 auto;
+  }
+  .brand{
+    display:flex;align-items:center;gap:.55rem;
+    font-family:'Fraunces', serif;
+    font-size:1.08rem;
+    font-weight:500;
+    letter-spacing:.01em;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .brand .star{width:16px;height:16px;color:var(--ink);}
+  nav.links{display:flex;gap:clamp(1rem,2vw,2rem);}
+  nav.links a{
+    font-size:.86rem;
+    text-decoration:none;
+    color:var(--ink-soft);
+    position:relative;
+    padding:.2rem 0;
+    transition:color .25s ease;
+    white-space:nowrap;
+  }
+  nav.links a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;
+    background:var(--rust);transition:right .3s ease;
+  }
+  nav.links a:hover{color:var(--ink);}
+  nav.links a:hover::after{right:0;}
+  .menu-btn{
+    display:none;background:none;border:1px solid var(--line);border-radius:4px;
+    width:38px;height:38px;cursor:pointer;position:relative;
+  }
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after{
+    content:"";position:absolute;left:9px;right:9px;height:1px;background:var(--ink);transition:transform .25s ease, opacity .25s ease;
+  }
+  .menu-btn span{top:18px;}
+  .menu-btn span::before{content:"";top:-6px;position:absolute;left:0;right:0;}
+  .menu-btn span::after{content:"";top:6px;position:absolute;left:0;right:0;}
+  body.nav-open .menu-btn span{background:transparent;}
+  body.nav-open .menu-btn span::before{transform:translateY(6px) rotate(45deg);}
+  body.nav-open .menu-btn span::after{transform:translateY(-6px) rotate(-45deg);}
+
+  @media (max-width:860px){
+    nav.links{
+      position:fixed;inset:0 0 0 auto;top:60px;
+      flex-direction:column;
+      background:var(--paper);
+      width:min(78vw,320px);height:calc(100% - 60px);
+      padding:2rem 2rem;gap:1.4rem;
+      transform:translateX(100%);
+      transition:transform .35s ease;
+      box-shadow:var(--shadow);
+      border-left:1px solid var(--line);
+    }
+    body.nav-open nav.links{transform:translateX(0);}
+    nav.links a{font-size:1rem;}
+    .menu-btn{display:block;}
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.6rem;
+    background:var(--ink);color:var(--cream);
+    padding:.85rem 1.7rem;
+    font-size:.86rem;letter-spacing:.05em;text-transform:uppercase;
+    text-decoration:none;border-radius:2px;
+    border:1px solid var(--ink);
+    transition:background .3s ease, color .3s ease, transform .3s ease;
+  }
+  .btn:hover{background:transparent;color:var(--ink);transform:translateY(-2px);}
+  .btn.outline{background:transparent;color:var(--ink);}
+  .btn.outline:hover{background:var(--ink);color:var(--cream);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:clamp(3.5rem,9vw,7rem) 0 clamp(3rem,7vw,5rem);
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem,6vw,4.4rem);
+    font-style:italic;
+    font-weight:500;
+  }
+  .hero .tagline{
+    font-size:clamp(1.05rem,2vw,1.25rem);
+    color:var(--ink-soft);
+    max-width:34ch;
+    margin-bottom:.4em;
+  }
+  .hero .categories{
+    font-size:.86rem;letter-spacing:.04em;color:var(--rust);
+    text-transform:uppercase;margin-bottom:2.1rem;font-weight:600;
+  }
+  .hero-figure{
+    position:relative;display:flex;justify-content:center;
+  }
+  .hero-figure .blob{
+    position:absolute;inset:2% 8%;
+    background:radial-gradient(circle at 40% 30%, var(--cream-2), var(--green) 130%);
+    border-radius:48% 52% 55% 45% / 55% 45% 55% 45%;
+    opacity:.55;z-index:0;
+    filter:blur(2px);
+  }
+  .hero-figure img{
+    position:relative;z-index:1;
+    max-width:280px;width:70%;
+    filter:drop-shadow(0 24px 30px rgba(38,34,28,.28));
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{max-width:62ch;margin-bottom:2.8rem;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(1.9rem,4vw,2.7rem);}
+  .section-head p{color:var(--ink-soft);font-size:1.03rem;}
+
+  /* ---------- APROPOS ---------- */
+  #apropos{
+    background:var(--green);
+    color:var(--cream);
+    padding:clamp(4rem,9vw,7rem) 0;
+  }
+  #apropos .wrap{
+    display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,4.5rem);
+    align-items:center;
+  }
+  #apropos .eyebrow{color:var(--mustard);}
+  #apropos h2{color:var(--paper);font-style:italic;}
+  #apropos p{color:rgba(248,243,232,.86);font-size:1.05rem;}
+  #apropos .figure{
+    position:relative;
+  }
+  #apropos .figure::before{
+    content:"";position:absolute;inset:-6% -10%;
+    border:1px solid rgba(248,243,232,.35);
+    border-radius:50% 50% 46% 54% / 54% 46% 54% 46%;
+  }
+  #apropos .figure img{
+    border-radius:50% 50% 46% 54% / 54% 46% 54% 46%;
+    background:var(--cream-2);
+    max-width:320px;margin:0 auto;
+  }
+
+  /* ---------- CREATIONS ---------- */
+  #creations{padding:clamp(4.5rem,9vw,7.5rem) 0 clamp(3rem,6vw,5rem);}
+
+  .featured{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,4vw,3.2rem);
+    align-items:center;
+    margin-bottom:clamp(3.5rem,7vw,5.5rem);
+  }
+  .featured .photo{
+    position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  }
+  .featured .photo img{width:100%;height:clamp(280px,42vw,480px);object-fit:cover;object-position:50% 30%;}
+  .featured .tag{
+    position:absolute;top:1rem;left:1rem;
+    background:var(--paper);color:var(--ink);
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:.4rem .8rem;border-radius:2px;font-weight:600;
+  }
+  .featured .text .eyebrow{color:var(--green);}
+  .featured h3{font-size:clamp(1.6rem,3vw,2.1rem);font-style:italic;}
+  .featured p{color:var(--ink-soft);}
+
+  .cat-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;
+  }
+  .cat-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .cat-card .imgs{
+    display:grid;grid-auto-flow:column;
+  }
+  .cat-card .imgs.single{grid-template-columns:1fr;}
+  .cat-card .imgs.double{grid-template-columns:1fr 1fr;}
+  .cat-card .imgs img{width:100%;height:170px;object-fit:cover;}
+  .cat-card .noimg{
+    height:120px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--cream-2),var(--cream));
+    color:var(--rust);
+  }
+  .cat-card .noimg .star{width:26px;height:26px;opacity:.55;}
+  .cat-card .body{padding:1.2rem 1.3rem 1.4rem;}
+  .cat-card h4{font-size:1.15rem;margin-bottom:.35em;font-style:italic;}
+  .cat-card p{font-size:.92rem;color:var(--ink-soft);margin:0;}
+
+  /* ---------- POULES BANNER ---------- */
+  .banner-poules{
+    margin-top:clamp(3.5rem,7vw,5.5rem);
+    background:var(--ink);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .banner-poules .split{
+    display:grid;grid-template-columns:1fr 1fr;
+  }
+  .banner-poules .split img{
+    width:100%;height:clamp(220px,32vw,340px);object-fit:cover;
+    filter:saturate(1.05);
+    opacity:.92;
+  }
+  .banner-poules .cap{
+    padding:2.2rem clamp(1.25rem,4vw,3rem) 2.6rem;
+    text-align:center;
+  }
+  .banner-poules .cap .eyebrow{color:var(--mustard);}
+  .banner-poules h3{color:var(--paper);font-style:italic;font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.3em;}
+  .banner-poules p{color:rgba(248,243,232,.75);max-width:52ch;margin:0 auto;}
+
+  /* ---------- LAINES ---------- */
+  #laines{
+    background:var(--cream-2);
+    padding:clamp(4.5rem,9vw,7.5rem) 0;
+  }
+  #laines .wrap{
+    display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,4rem);
+    align-items:center;
+  }
+  #laines .figure{position:relative;}
+  #laines .figure img{
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    max-width:300px;margin:0 auto;
+  }
+  #laines .eyebrow{color:var(--rust);}
+  #laines h2{font-style:italic;}
+  #laines p{color:var(--ink-soft);}
+  #laines p + p{margin-top:1.1em;}
+
+  /* ---------- FAQ ---------- */
+  #faq{padding:clamp(4.5rem,9vw,7.5rem) 0;}
+  #faq .wrap{
+    display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,5vw,3.5rem);
+    align-items:start;
+  }
+  #faq .side{position:sticky;top:110px;}
+  #faq .side img{
+    border-radius:var(--radius);
+    max-width:260px;
+  }
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:1.25rem 0;font-family:'Fraunces',serif;font-size:1.12rem;color:var(--ink);
+  }
+  .faq-q .plus{
+    flex:none;width:22px;height:22px;position:relative;
+  }
+  .faq-q .plus::before, .faq-q .plus::after{
+    content:"";position:absolute;background:var(--ink);transition:transform .3s ease;
+  }
+  .faq-q .plus::before{left:0;right:0;top:50%;height:1px;transform:translateY(-.5px);}
+  .faq-q .plus::after{top:0;bottom:0;left:50%;width:1px;transform:translateX(-.5px);}
+  .faq-item.open .faq-q .plus::after{transform:translateX(-.5px) rotate(90deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .4s ease;
+  }
+  .faq-a p{margin:0 0 1.4rem;color:var(--ink-soft);max-width:60ch;}
+  .faq-note{margin-top:2rem;font-size:.95rem;color:var(--ink-soft);}
+  .faq-note a{color:var(--rust);text-decoration:underline;text-underline-offset:3px;}
+
+  /* ---------- AIGUILLES ---------- */
+  #aiguilles{
+    background:var(--green-dark);
+    color:var(--cream);
+    padding:clamp(4.5rem,9vw,7.5rem) 0;
+  }
+  #aiguilles .wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);
+    align-items:center;
+  }
+  #aiguilles .photo img{
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    width:100%;height:clamp(260px,32vw,400px);object-fit:cover;
+  }
+  #aiguilles .eyebrow{color:var(--mustard);}
+  #aiguilles h2{color:var(--paper);font-style:italic;}
+  #aiguilles p{color:rgba(248,243,232,.82);}
+  #aiguilles .pattern{
+    display:inline-block;margin-top:1rem;font-size:.85rem;letter-spacing:.03em;
+    color:var(--mustard);border-top:1px solid rgba(248,243,232,.25);padding-top:1rem;
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact{padding:clamp(4.5rem,9vw,7.5rem) 0 clamp(3rem,6vw,4rem);}
+  #contact .wrap{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);
+    align-items:center;
+  }
+  #contact h2{font-style:italic;}
+  #contact p{color:var(--ink-soft);max-width:44ch;}
+  .contact-links{margin-top:1.6rem;display:flex;flex-direction:column;gap:.7rem;}
+  .email-link{
+    font-family:'Fraunces',serif;font-size:1.3rem;font-style:italic;
+    text-decoration:none;color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    display:inline-block;width:fit-content;padding-bottom:.1em;
+    transition:color .25s ease, border-color .25s ease;
+  }
+  .email-link:hover{color:var(--rust);border-color:var(--rust);}
+  .fb-line{
+    font-size:.92rem;color:var(--ink-soft);display:flex;align-items:center;gap:.5rem;
+  }
+  #contact .figure img{
+    border-radius:var(--radius);
+    max-width:300px;margin:0 auto;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:2.2rem 0;
+  }
+  footer .wrap{
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  }
+  footer .brand{font-size:.95rem;}
+  footer .fine{font-size:.8rem;color:var(--ink-soft);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .hero .wrap, #apropos .wrap, #laines .wrap, #faq .wrap, #aiguilles .wrap, #contact .wrap, .featured{
+      grid-template-columns:1fr !important;
+    }
+    .hero-figure{order:-1;margin-bottom:1rem;}
+    .hero-figure img{max-width:220px;}
+    #apropos .figure, #laines .figure, #contact .figure{order:-1;}
+    #faq .side{position:static;display:flex;justify-content:center;margin-bottom:1rem;}
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .banner-poules .split{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .cat-grid{grid-template-columns:1fr;}
+    .banner-poules .split{grid-template-columns:1fr;}
+    .banner-poules .split img{height:220px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a href="#accueil" class="brand">
+      <svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg>
+      La Tricoteuse Masquée
+    </a>
+    <nav class="links">
+      <a href="#accueil">Accueil</a>
+      <a href="#apropos">À propos</a>
+      <a href="#creations">Créations</a>
+      <a href="#laines">Laines</a>
+      <a href="#faq">FAQ</a>
+      <a href="#aiguilles">Aiguilles</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" aria-label="Ouvrir le menu"><span></span></button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ACCUEIL -->
+  <section id="accueil" class="hero">
+    <div class="wrap">
+      <div class="hero-text reveal">
+        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> Tricot artisanal</p>
+        <h1>La tricoteuse masquée</h1>
+        <p class="tagline">Tricots faits à la main avec soin et passion.</p>
+        <p class="categories">Chandails · Châles · Bas · Tuques et accessoires</p>
+        <a href="#creations" class="btn">Voir mes créations</a>
+      </div>
+      <div class="hero-figure reveal">
+        <div class="blob"></div>
+        <img src="assets/illu/masque-debout.jpg" alt="Illustration de la tricoteuse masquée, debout, tricotant avec son chat noir">
+      </div>
+    </div>
+  </section>
+
+  <!-- APROPOS -->
+  <section id="apropos">
+    <div class="wrap">
+      <div class="figure reveal">
+        <img src="assets/illu/masque-fauteuil.jpg" alt="Illustration de la tricoteuse masquée assise dans un fauteuil, en train de tricoter">
+      </div>
+      <div class="reveal">
+        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> À propos</p>
+        <h2>Une passion tricotée depuis l'enfance</h2>
+        <p>Je tricote depuis mon enfance — et j'en apprends encore chaque jour ! Chaque projet est réalisé à la main, avec une attention particulière aux détails et au choix des fibres. J'aime créer des pièces confortables, durables et uniques, qui accompagneront leurs propriétaires pendant de nombreuses années.</p>
+        <p>J'aime les défis : ceux qui demandent de l'attention pour le motif, le point ou l'agencement des couleurs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATIONS -->
+  <section id="creations">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow" style="justify-content:center;"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> Mes créations</p>
+        <h2>Un aperçu de mes réalisations</h2>
+        <p>Chandails, châles, bas, tuques, vêtements pour bébés et bien plus — un aperçu des pièces qui prennent vie entre mes mains.</p>
+      </div>
+
+      <div class="featured reveal">
+        <div class="photo">
+          <span class="tag">Coup de cœur</span>
+          <img src="tricots/chandail2.jpeg" alt="Cardigans à motif carreaux vert et noir, tricotés pour bébé, suspendus à l'extérieur">
+        </div>
+        <div class="text">
+          <p class="eyebrow">Chandails</p>
+          <h3>Le tricot du moment</h3>
+          <p>Un duo de cardigans à carreaux, tricotés avec soin pour les tout-petits — parmi les pièces dont je suis la plus fière. Une création personnelle!</p>
+        </div>
+      </div>
+
+      <div class="cat-grid">
+        <div class="cat-card reveal">
+          <div class="imgs single"><img src="tricots/chandail.jpeg" alt="Chandail zippé tricoté en blocs de couleurs moutarde et sarcelle"></div>
+          <div class="body">
+            <h4>Chandails</h4>
+            <p>Pulls, cardigans et gilets pour toutes les saisons, dans des teintes qui durent.</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal">
+          <div class="imgs single"><img src="tricots/chales.jpeg" alt="Châles en cours de tricotage, en teintes de sarcelle et de rose, sur une table"></div>
+          <div class="body">
+            <h4>Châles</h4>
+            <p>Pour envelopper les épaules, légers ou plus dense, selon la saison.</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal">
+          <div class="imgs single"><img src="tricots/bas.jpeg" alt="Bas et mitaines tricotés main, posés sur la roche"></div>
+          <div class="body">
+            <h4>Bas</h4>
+            <p>Chaussettes bien chaudes, dans des laines douces au toucher.</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal">
+          <div class="imgs double">
+            <img src="tricots/bonnet.jpeg" alt="Tuque à pompon tricotée en rayures sarcelle et noir">
+            <img src="tricots/foulard.jpeg" alt="Bandeau tricoté multicolore">
+          </div>
+          <div class="body">
+            <h4>Tuques et bandeaux</h4>
+            <p>Pour braver l'hiver avec style.</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal">
+          <div class="imgs double">
+            <img src="tricots/bonnets.jpeg" alt="Trois petites tuques de bébé pastel">
+            <img src="tricots/chandail3.jpeg" alt="Cardigan à capuchon rouge pour bébé">
+          </div>
+          <div class="body">
+            <h4>Vêtements pour bébés</h4>
+            <p>Des tricots tout doux pour les tout-petits.</p>
+          </div>
+        </div>
+
+        <div class="cat-card reveal">
+          <div class="noimg"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg></div>
+          <div class="body">
+            <h4>Robes</h4>
+            <p>Des pièces légères, pour les beaux jours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner-poules reveal">
+      <div class="split">
+        <img src="tricots/poules1.jpeg" alt="Rangée de poules tricotées, colorées, assises sur une clôture de bois">
+        <img src="tricots/poules2.jpeg" alt="Gros plan sur les poules tricotées alignées sur une clôture">
+      </div>
+      <div class="cap">
+        <p class="eyebrow" style="justify-content:center;">Et puis, il y a...</p>
+        <h3>Les poules</h3>
+        <p>Une petite bande haute en couleur, toujours prête à monter la garde au poulailler.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAINES -->
+  <section id="laines">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> Les matières</p>
+        <h2>Les laines que j'aime utiliser</h2>
+        <p>Je préfère tricoter avec des laines ni trop fines ni trop grosses : j'oublie donc les projets qui nécessitent une grosseur « Lace », « Bulky » ou plus imposante encore. J'apprécie particulièrement les grosseurs « Sport » et « DK ».</p>
+        <p>Selon le modèle, je privilégie les fibres naturelles d'origine animale — laine de mouton, alpaga, chèvre — ou végétale, comme le coton et le lin. J'aime aussi la fibre synthétique, surtout pour les vêtements qui doivent passer à la machine.</p>
+      </div>
+      <div class="figure reveal">
+        <img src="assets/illu/masque-cafe.jpg" alt="Illustration de la tricoteuse masquée tricotant en terrasse d'un café">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="side reveal">
+        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> Questions</p>
+        <h2>Foire aux questions</h2>
+        <img src="assets/illu/masque-chat-aiguilles.jpg" alt="Illustration du chat noir surveillant les aiguilles à tricoter">
+      </div>
+      <div class="reveal">
+        <div class="faq-item">
+          <button class="faq-q"><span>Combien de temps faut-il pour réaliser un chandail ?</span><span class="plus"></span></button>
+          <div class="faq-a"><p>Tout dépend du modèle et de la grosseur de laine. Un chandail pour enfant prend environ un mois, tandis que pour un adulte, il faut souvent compter le double, voire le triple.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Acceptez-vous les commandes personnalisées ?</span><span class="plus"></span></button>
+          <div class="faq-a"><p>Non, car le résultat est souvent loin de l'idée que s'en faisait la personne qui commande. Je préfère proposer des pièces déjà confectionnées.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Comment entretenir un tricot ?</span><span class="plus"></span></button>
+          <div class="faq-a"><p>Ça dépend de la fibre utilisée — le mieux est de se référer à l'étiquette, ou de me poser la question directement.</p></div>
+        </div>
+        <p class="faq-note">D'autres questions ? <a href="mailto:latricoteusemasquee@gmail.com">Contactez-moi par courriel</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AIGUILLES -->
+  <section id="aiguilles">
+    <div class="wrap">
+      <div class="photo reveal">
+        <img src="tricots/chandail_en_cours.jpeg" alt="Chandail en cours de tricotage, en laine lavande et menthe, avec les pelotes de laine">
+      </div>
+      <div class="reveal">
+        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> En ce moment</p>
+        <h2>Sur mes aiguilles</h2>
+        <p>Je tricote le chandail « November Sky » de Drops Design, avec les laines de « Un p'tit brin farfelu ».</p>
+        <p class="pattern">Modèle « top-down », à tricoter en circulaire.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> Contact</p>
+        <h2>Une question, une envie de jaser tricot ?</h2>
+        <p>Écrivez-moi, ce sera un plaisir d'échanger.</p>
+        <div class="contact-links">
+          <a class="email-link" href="mailto:latricoteusemasquee@gmail.com">latricoteusemasquee@gmail.com</a>
+          <p class="fb-line">Également présente sur Facebook.</p>
+        </div>
+      </div>
+      <div class="figure reveal">
+        <img src="assets/illu/masque-chat-fierte.jpg" alt="Illustration de la tricoteuse masquée montrant fièrement un chandail terminé à son chat">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#accueil" class="brand">
+      <svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg>
+      La Tricoteuse Masquée
+    </a>
+    <p class="fine">Tricots faits main, avec soin et passion.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  menuBtn.addEventListener('click', () => document.body.classList.toggle('nav-open'));
+  document.querySelectorAll('nav.links a').forEach(a=>{
+    a.addEventListener('click', ()=>document.body.classList.remove('nav-open'));
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

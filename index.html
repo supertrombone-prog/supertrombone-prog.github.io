@@ -317,7 +317,7 @@
   #laines p + p{margin-top:1.1em;}
 
   /* ---------- FAQ ---------- */
-  #faq{padding:clamp(4.5rem,9vw,7.5rem) 0;}
+  #faq{padding:clamp(4.5rem,9vw,7.5rem) 0 clamp(2rem,4vw,3rem);}
   #faq .wrap{
     display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,5vw,3.5rem);
     align-items:start;
@@ -373,7 +373,7 @@
   }
 
   /* ---------- CONTACT ---------- */
-  #contact{padding:clamp(4.5rem,9vw,7.5rem) 0 clamp(3rem,6vw,4rem);}
+  #contact{padding:clamp(2rem,4vw,3rem) 0 clamp(3rem,6vw,4rem);}
   #contact .wrap{
     display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);
     align-items:center;
@@ -391,7 +391,10 @@
   .email-link:hover{color:var(--rust);border-color:var(--rust);}
   .fb-line{
     font-size:.92rem;color:var(--ink-soft);display:flex;align-items:center;gap:.5rem;
+    width:fit-content;text-decoration:none;transition:color .25s ease;
   }
+  .fb-line:hover{color:var(--rust);}
+  .fb-line .fb-icon{width:18px;height:18px;flex:none;fill:currentColor;}
   #contact .figure img{
     border-radius:var(--radius);
     max-width:300px;margin:0 auto;
@@ -493,19 +496,20 @@
 
       <div class="featured reveal">
         <div class="photo">
-          <span class="tag">Coup de cœur</span>
-          <img src="tricots/chandail2.jpeg" alt="Cardigans à motif carreaux vert et noir, tricotés pour bébé, suspendus à l'extérieur">
+          <span class="tag">Sur mes aiguilles...</span>
+          <img src="tricots/chandail_en_cours.jpeg" alt="Cardigans à motif carreaux vert et noir, tricotés pour bébé, suspendus à l'extérieur">
         </div>
         <div class="text">
           <p class="eyebrow">Chandails</p>
           <h3>Le tricot du moment</h3>
-          <p>Un duo de cardigans à carreaux, tricotés avec soin pour les tout-petits — parmi les pièces dont je suis la plus fière. Une création personnelle!</p>
+          <p>Je tricote le chandail « November Sky » de Drops Design, avec les laines de « Un p'tit brin farfelu ».</p>
+          <p class="pattern">Modèle « top-down », à tricoter en circulaire.</p>
         </div>
       </div>
 
       <div class="cat-grid">
         <div class="cat-card reveal">
-          <div class="imgs single"><img src="tricots/chandail.jpeg" alt="Chandail zippé tricoté en blocs de couleurs moutarde et sarcelle"></div>
+          <div class="imgs single"><img src="tricots/chandail2.jpeg" alt="Chandail zippé tricoté en blocs de couleurs moutarde et sarcelle"></div>
           <div class="body">
             <h4>Chandails</h4>
             <p>Pulls, cardigans et gilets pour toutes les saisons, dans des teintes qui durent.</p>
@@ -609,21 +613,6 @@
     </div>
   </section>
 
-  <!-- AIGUILLES -->
-  <section id="aiguilles">
-    <div class="wrap">
-      <div class="photo reveal">
-        <img src="tricots/chandail_en_cours.jpeg" alt="Chandail en cours de tricotage, en laine lavande et menthe, avec les pelotes de laine">
-      </div>
-      <div class="reveal">
-        <p class="eyebrow"><svg class="star" viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.9l-6.18 3.12L7 13.14 2 8.27l6.91-1.01z"/></svg> En ce moment</p>
-        <h2>Sur mes aiguilles</h2>
-        <p>Je tricote le chandail « November Sky » de Drops Design, avec les laines de « Un p'tit brin farfelu ».</p>
-        <p class="pattern">Modèle « top-down », à tricoter en circulaire.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
@@ -633,7 +622,10 @@
         <p>Écrivez-moi, ce sera un plaisir d'échanger.</p>
         <div class="contact-links">
           <a class="email-link" href="mailto:latricoteusemasquee@gmail.com">latricoteusemasquee@gmail.com</a>
-          <p class="fb-line">Également présente sur Facebook.</p>
+          <a class="fb-line" href="https://www.facebook.com/latricoteusemasquee/" target="_blank" rel="noopener">
+            <svg class="fb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.89c0-.86.24-1.44 1.47-1.44h1.57V4.84C16.23 4.79 15.32 4.7 14.26 4.7c-2.2 0-3.71 1.34-3.71 3.8v2.12H7.98v2.96h2.57V21h2.95z"/></svg>
+            Également présente sur Facebook
+          </a>
         </div>
       </div>
       <div class="figure reveal">

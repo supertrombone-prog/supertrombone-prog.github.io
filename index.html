@@ -435,6 +435,20 @@
     transition:background .25s ease;
   }
   .lightbox-close:hover{background:rgba(248,243,232,.2);}
+  .lightbox-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:48px;height:48px;border-radius:50%;
+    background:rgba(248,243,232,.1);border:1px solid rgba(248,243,232,.3);
+    color:var(--cream);font-size:1.1rem;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .25s ease;
+  }
+  .lightbox-arrow:hover{background:rgba(248,243,232,.2);}
+  .lightbox-prev{left:clamp(.5rem,3vw,2rem);}
+  .lightbox-next{right:clamp(.5rem,3vw,2rem);}
+  @media (max-width:640px){
+    .lightbox-arrow{width:40px;height:40px;}
+  }
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:900px){
@@ -662,7 +676,9 @@
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" aria-label="Fermer l'image">&times;</button>
+  <button class="lightbox-arrow lightbox-prev" aria-label="Image précédente">&#10094;</button>
   <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-arrow lightbox-next" aria-label="Image suivante">&#10095;</button>
 </div>
 
 <footer>
@@ -736,6 +752,8 @@
   galleryImgs.forEach((img, i) => img.addEventListener('click', ()=>openLightbox(i)));
 
   lightboxClose.addEventListener('click', closeLightbox);
+  document.querySelector('.lightbox-prev').addEventListener('click', ()=>showImage(currentIndex - 1));
+  document.querySelector('.lightbox-next').addEventListener('click', ()=>showImage(currentIndex + 1));
   lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e)=>{
     if(!lightbox.classList.contains('open')) return;

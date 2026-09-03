@@ -350,26 +350,9 @@
   .faq-note{margin-top:2rem;font-size:.95rem;color:var(--ink-soft);}
   .faq-note a{color:var(--rust);text-decoration:underline;text-underline-offset:3px;}
 
-  /* ---------- AIGUILLES ---------- */
-  #aiguilles{
-    background:var(--green-dark);
-    color:var(--cream);
-    padding:clamp(4.5rem,9vw,7.5rem) 0;
-  }
-  #aiguilles .wrap{
-    display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);
-    align-items:center;
-  }
-  #aiguilles .photo img{
-    border-radius:var(--radius);box-shadow:var(--shadow);
-    width:100%;height:clamp(260px,32vw,400px);object-fit:cover;
-  }
-  #aiguilles .eyebrow{color:var(--mustard);}
-  #aiguilles h2{color:var(--paper);font-style:italic;}
-  #aiguilles p{color:rgba(248,243,232,.82);}
-  #aiguilles .pattern{
+  .featured .pattern{
     display:inline-block;margin-top:1rem;font-size:.85rem;letter-spacing:.03em;
-    color:var(--mustard);border-top:1px solid rgba(248,243,232,.25);padding-top:1rem;
+    color:var(--rust);border-top:1px solid var(--line);padding-top:1rem;
   }
 
   /* ---------- CONTACT ---------- */
@@ -411,9 +394,51 @@
   footer .brand{font-size:.95rem;}
   footer .fine{font-size:.8rem;color:var(--ink-soft);}
 
+  /* ---------- LIGHTBOX ---------- */
+  #creations .featured .photo img,
+  #creations .cat-card .imgs img,
+  #creations .banner-poules .split img{
+    cursor:zoom-in;transition:transform .4s ease, filter .4s ease;
+  }
+  #creations .featured .photo img:hover,
+  #creations .cat-card .imgs img:hover,
+  #creations .banner-poules .split img:hover{
+    transform:scale(1.035);
+    filter:brightness(1.03);
+  }
+  .lightbox{
+    position:fixed;inset:0;z-index:1000;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(20,18,14,.92);
+    padding:clamp(1rem,5vw,4rem);
+    opacity:0;visibility:hidden;
+    transition:opacity .3s ease, visibility 0s linear .3s;
+  }
+  .lightbox.open{
+    opacity:1;visibility:visible;
+    transition:opacity .3s ease, visibility 0s linear 0s;
+  }
+  .lightbox img{
+    max-width:100%;max-height:88vh;
+    border-radius:2px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+    transform:scale(.96);
+    transition:transform .35s ease;
+  }
+  .lightbox.open img{transform:scale(1);}
+  .lightbox-close{
+    position:absolute;top:clamp(1rem,3vw,2rem);right:clamp(1rem,3vw,2rem);
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(248,243,232,.1);border:1px solid rgba(248,243,232,.3);
+    color:var(--cream);font-size:1.6rem;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .25s ease;
+  }
+  .lightbox-close:hover{background:rgba(248,243,232,.2);}
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:900px){
-    .hero .wrap, #apropos .wrap, #laines .wrap, #faq .wrap, #aiguilles .wrap, #contact .wrap, .featured{
+    .hero .wrap, #apropos .wrap, #laines .wrap, #faq .wrap, #contact .wrap, .featured{
       grid-template-columns:1fr !important;
     }
     .hero-figure{order:-1;margin-bottom:1rem;}
@@ -444,7 +469,6 @@
       <a href="#creations">Créations</a>
       <a href="#laines">Laines</a>
       <a href="#faq">FAQ</a>
-      <a href="#aiguilles">Aiguilles</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="menu-btn" aria-label="Ouvrir le menu"><span></span></button>
@@ -636,6 +660,11 @@
 
 </main>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Fermer l'image">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <footer>
   <div class="wrap">
     <a href="#accueil" class="brand">
@@ -678,6 +707,29 @@
     });
   }, {threshold:.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Lightbox for "Créations" images
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.querySelector('.lightbox-close');
+
+  function openLightbox(img){
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('#creations .featured .photo img, #creations .cat-card .imgs img, #creations .banner-poules .split img')
+    .forEach(img => img.addEventListener('click', ()=>openLightbox(img)));
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
 </script>
 
 </body>

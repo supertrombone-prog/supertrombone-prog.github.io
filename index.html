@@ -712,10 +712,19 @@
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.querySelector('.lightbox-close');
+  const galleryImgs = Array.from(document.querySelectorAll(
+    '#creations .featured .photo img, #creations .cat-card .imgs img, #creations .banner-poules .split img'
+  ));
+  let currentIndex = -1;
 
-  function openLightbox(img){
+  function showImage(index){
+    currentIndex = (index + galleryImgs.length) % galleryImgs.length;
+    const img = galleryImgs[currentIndex];
     lightboxImg.src = img.currentSrc || img.src;
     lightboxImg.alt = img.alt || '';
+  }
+  function openLightbox(index){
+    showImage(index);
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -724,12 +733,16 @@
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('#creations .featured .photo img, #creations .cat-card .imgs img, #creations .banner-poules .split img')
-    .forEach(img => img.addEventListener('click', ()=>openLightbox(img)));
+  galleryImgs.forEach((img, i) => img.addEventListener('click', ()=>openLightbox(i)));
 
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
+  document.addEventListener('keydown', (e)=>{
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    else if(e.key === 'ArrowRight') showImage(currentIndex + 1);
+    else if(e.key === 'ArrowLeft') showImage(currentIndex - 1);
+  });
 </script>
 
 </body>
